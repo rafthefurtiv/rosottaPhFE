@@ -1,0 +1,7 @@
+.slot{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center; /* Centro del testo */
+    --p-card-border-radius: 5px; /* Imposta il nuovo valore per il border radius */
+}

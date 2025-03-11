@@ -1,0 +1,28 @@
+.turni{
+    display: flex;
+    flex-direction: row;
+}
+
+.page{
+    margin: 0 100px 0 100px;
+}
+
+.week{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: 10px;
+    justify-content: space-around;
+    
+}
+
+.day{
+    display: flex;
+}
+
+.red-background button{
+    background: red;
+}
+
+p-togglebutton button{
+    background-color: red;
+}

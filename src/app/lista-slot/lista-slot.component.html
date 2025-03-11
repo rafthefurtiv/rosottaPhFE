@@ -1,0 +1,29 @@
+
+<div class="page">
+    
+    <div style="text-align: center;" class="m-3">
+        <p-datepicker [(ngModel)]="date" [showIcon]="true" inputId="buttondisplay" [showOnFocus]="false" placeholder="Selezionare la data"
+        dateFormat="yy-mm-dd" />
+    </div>
+
+    <div class="mt-4" style="text-align: center;">
+        <p-button label="Carica" (click)="carica()"/>
+    </div>
+    
+    
+    <div>
+        <div *ngFor="let slot of slots">
+            <app-slot-lettura [slotInput]="slot" (eliminaSlotEvent)="carica()"></app-slot-lettura>
+            <p-divider />
+    
+        </div>
+
+        <div class="mt-5" *ngIf="slots.length == 0" style="text-align: center;">
+            NESSUNO SLOT DISPONIBILILE PER QUESTA GIORNATA
+        </div>
+    </div>
+
+
+</div>
+
+

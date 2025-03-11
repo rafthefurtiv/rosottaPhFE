@@ -1,0 +1,53 @@
+<p-dialog header="Prenota" [visible]="true" [style]="{ width: '25rem' }" [closable]="false">
+    <span class="p-text-secondary block mb-8">Compila i campi ed effettua una prenotazione per: {{slotInput.orarioInizio}} - {{slotInput.orarioFine}}</span>
+    
+    <div class="flex items-center gap-4 mb-4">
+        <label for="nome" class="font-semibold w-24">Nome*</label>
+        <input pInputText id="nome" class="flex-auto" autocomplete="off" [(ngModel)]="slot.nome"/>
+    </div>
+    <div class="flex items-center gap-4 mb-4">
+        <label for="cognome" class="font-semibold w-24">Cognome*</label>
+        <input pInputText id="cognome" class="flex-auto" autocomplete="off" [(ngModel)]="slot.cognome"/>
+    </div>
+    <div class="flex items-center gap-4 mb-4">
+        <label for="email" class="font-semibold w-24">Email</label>
+        <input pInputText id="email" class="flex-auto" autocomplete="off" [(ngModel)]="slot.email"/>
+    </div>
+    <div class="flex items-center gap-4 mb-4">
+        <label for="telefono" class="font-semibold w-24">Telefono*</label>
+        <input pInputText id="telefono" class="flex-auto" autocomplete="off" [(ngModel)]="slot.telefono"/>
+    </div>
+    <div class="flex items-center gap-4 mb-8">
+        <label for="telefono" class="font-semibold w-24">Note</label>
+        <textarea rows="5" cols="30" pTextarea [(ngModel)]="slot.note"></textarea>
+
+    </div>
+    <div class="flex justify-end gap-2">
+        <p-button label="Cancel" severity="secondary" (click)="chiudi()"/>
+        <p-button label="Prenota" (click)="salva()"/>
+    </div>
+</p-dialog>
+
+
+<p-toast />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

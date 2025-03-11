@@ -1,0 +1,15 @@
+<div>
+
+    <div class="servizi">
+        <div *ngFor="let servizio of servizi">
+
+            <input type="checkbox" [(ngModel)]="servizio.selected" style="height: 15px; width: 15px" (change)="ricarica()">
+            {{servizio.titolo}} ({{servizio.durata}} min)
+        </div>
+    </div>
+
+    <div class="mt-4" style="text-align: center;">
+        <p-button label="Ricerca" (click)="ricerca()"/>
+    </div>
+
+</div>

@@ -1,0 +1,50 @@
+
+<div class="page">
+    
+    <div style="text-align: center;" class="m-3">
+        <p-datepicker [(ngModel)]="date" [showIcon]="true" inputId="buttondisplay" [showOnFocus]="false" placeholder="Selezionare la data"
+        dateFormat="yy-mm-dd" (onSelect)="ricarica()" [minDate]="minDate" [maxDate]="maxDate" [disabledDates]="disabledDays"/>
+    
+    </div>
+
+    <div class="mb-4 mt-4">
+        <app-servizi [servizi]="servizi" (ricercaEvent)="ricerca()" [date]="date" (ricaricaEvent)="ricarica()"></app-servizi>
+    </div>
+    
+    
+    <div *ngIf="!prenotazioneEffettuata && ricercaEffettuata">
+        <div *ngFor="let slot of slots">
+            <app-slot [orarioInizio]="slot.orarioInizio" [orarioFine]="slot.orarioFine" (prenotaEvent)="mostraModale(slot)"></app-slot>
+            <p-divider />
+    
+        </div>
+
+        <div *ngIf="slots.length == 0" class="center">
+            <div class="center cento">
+                <p-message  size="large" severity="warn" variant="simple">NESSUNO SLOT DISPONIBILILE PER QUESTA GIORNATA</p-message>
+
+            </div>
+            
+        </div>
+    </div>
+
+    <div *ngIf="prenotazioneEffettuata">
+        <p class="mb-0">
+            Prenotazione effettuata
+        </p>
+        <p class="mt-0">
+            Verrà inviata una email come promemora all'indirizzo specificato durante la registrazione.
+        </p>
+    </div>
+
+</div>
+
+<div *ngIf="modalePrenotazioneVisibile">
+    <app-modale-slot [visibiles]="true" (formSlotEvent)="prenota($event)" 
+    (formSlotEventError)="erroreModale()" (chiudiDialogEvent)="modalePrenotazioneVisibile = false"
+[slotInput]="slotInput"></app-modale-slot>
+</div>
+
+
+<p-toast/>
+

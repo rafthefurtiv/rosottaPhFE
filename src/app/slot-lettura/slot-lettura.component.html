@@ -1,0 +1,44 @@
+
+<div style="text-align: center;">
+    <p-card [header]="slotInput.titolo" class="slot">
+
+        <div>
+            <p class="m-1">
+                {{slotInput.nome}} {{slotInput.cognome}}
+            </p>
+        </div>
+
+        <div>
+            <p class="m-1">
+                {{slotInput.email}}
+            </p>
+        </div>
+
+        <div>
+            <p class="m-1">
+                {{slotInput.telefono}}
+            </p>
+        </div>
+
+        <div>
+            <p class="m-1">
+                {{slotInput.orarioInizio}} - {{slotInput.orarioFine}}
+            </p>
+        </div>
+
+        <div>
+            <p class="m-1">
+                {{slotInput.note}}
+            </p>
+        </div>
+    
+        <div>
+            <div class="mt-3">
+                <p-button label="Elimina" (click)="elimina()"/>
+            </div>
+        </div>
+    
+    </p-card>
+</div>
+
+

@@ -1,0 +1,107 @@
+
+<div class="page">
+
+    <p-tabs value="0">
+        <p-tablist>
+            <p-tab value="0">ROUTINE</p-tab>
+            <p-tab value="1">EVENT</p-tab>
+        </p-tablist>
+        <p-tabpanels>
+            <p-tabpanel value="0">
+
+                <div class="week">
+                    <p-button *ngFor="let giorno of giorniSettimana" [label]="giorno.giorno.giorno"
+                     [ngClass]="{'red-background': !giorno.giorno.giornoAttivo}" (click)="changeGiornoScelto(giorno.giorno.giorno)"/>
+                </div>
+
+                <div class="text-center mt-4">
+                    {{giornoScelto}}
+                </div>
+
+                <div style="text-align: center;" class="m-3">
+                    <p-datepicker [showIcon]="true" [(ngModel)]="orarioGiorno.orarioInizio" inputId="buttondisplay" [showOnFocus]="false" placeholder="Orario inizio"
+                     timeOnly="true" hourFormat="24" [showTime]="true" />
+                </div>
+            
+                <div style="text-align: center;" class="m-3">
+                    <p-datepicker [showIcon]="true" [(ngModel)]="orarioGiorno.orarioFine" inputId="buttondisplay" [showOnFocus]="false" placeholder="Orario fine"
+                    dateFormat="yy-mm-dd" timeOnly="true" [showTime]="true" [minDate]="orario.orarioInizio"/>
+                </div>
+
+                <div class="mt-4" style="text-align: center;">
+                    <p-button label="Aggiungi" (click)="aggiungiTurnoGiorno()"/>
+                </div>
+
+                <div class="turni mt-3">
+                    <div class="mr-3" *ngFor="let turno of turniGiornoModel.turni">
+                        <p-chip label="{{turno.orarioInizio}} - {{turno.orarioFine}}" [removable]="true" (onRemove)="eliminaTurno(turno, turniGiornoModel)"/>
+                    </div>
+                </div>
+
+                <div class="mt-4" style="text-align: right;">
+                    <p-button label="Salva" (click)="salvaTurniGiorni()"/>
+                </div>
+
+            </p-tabpanel>
+
+
+
+
+            <p-tabpanel value="1">
+
+                <div style="display: flex; flex-direction: row; justify-content: center;">
+                    <div style="text-align: center;" class="m-3">
+                        <p-datepicker [(ngModel)]="date" [showIcon]="true" inputId="buttondisplay" [showOnFocus]="false" placeholder="Selezionare la data"
+                        dateFormat="yy-mm-dd" (onSelect)="cercaTurni()"/>
+                    </div>
+                    <div class="pt-3">
+                        <p-button (click)="op.toggle($event)" icon="pi pi-bookmark-fill" label=""/>
+                        <p-popover #op>
+                            <p-datepicker [(ngModel)]="dateWithTurniDto" [showIcon]="true" inputId="buttondisplay" [showOnFocus]="false" placeholder="Selezionare la data"
+                            dateFormat="yy-mm-dd" selectionMode="multiple" (onSelect)="disabilitaSelezione()"
+                            (ngModelChange)="disabilitaSelezione()" [inline]="true"/> 
+                        </p-popover>
+            
+            
+            
+                    </div>
+                </div>
+            
+            
+                <div style="text-align: center;" class="m-3">
+                    <p-datepicker [showIcon]="true" [(ngModel)]="orario.orarioInizio" inputId="buttondisplay" [showOnFocus]="false" placeholder="Orario inizio"
+                     timeOnly="true" hourFormat="24" [showTime]="true" />
+                </div>
+            
+                <div style="text-align: center;" class="m-3">
+                    <p-datepicker [showIcon]="true" [(ngModel)]="orario.orarioFine" inputId="buttondisplay" [showOnFocus]="false" placeholder="Orario fine"
+                    dateFormat="yy-mm-dd" timeOnly="true" [showTime]="true" [minDate]="orario.orarioInizio"/>
+                </div>
+            
+                
+                <div class="mt-4" style="text-align: center;">
+                    <p-button label="Aggiungi" (click)="aggiungiTurno()"/>
+                </div>
+            
+                <div class="turni mt-3">
+                    <div class="mr-3" *ngFor="let turno of turniModel.turni">
+                        <p-chip label="{{turno.orarioInizio}} - {{turno.orarioFine}}" [removable]="true" (onRemove)="eliminaTurno(turno, turniModel)"/>
+                    </div>
+                </div>
+
+                <div class="mt-4" style="text-align: right;">
+                    <p-button label="Salva" (click)="salvaTurni()"/>
+                </div>
+
+            </p-tabpanel>
+        </p-tabpanels>
+    </p-tabs>
+
+
+
+</div>
+
+
+
+<p-toast/>
+
