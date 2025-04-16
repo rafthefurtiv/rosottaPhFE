@@ -15,7 +15,7 @@ import { forkJoin } from 'rxjs';
 import { CommonModule } from '@angular/common';  
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { TabsModule } from 'primeng/tabs';
-
+import { SelectButtonModule } from 'primeng/selectbutton';
 
 
 
@@ -25,7 +25,7 @@ import { TabsModule } from 'primeng/tabs';
 @Component({
   selector: 'app-configurazione',
   imports: [DatePickerModule, ToastModule, FormsModule, ToggleSwitchModule, SliderModule, ButtonModule, NgFor, ChipModule, PopoverModule
-    ,CommonModule, ToggleButtonModule, TabsModule
+    ,CommonModule, ToggleButtonModule, TabsModule, SelectButtonModule
   ],
   providers: [MessageService, DatePipe],
   templateUrl: './configurazione.component.html',
@@ -46,6 +46,8 @@ export class ConfigurazioneComponent implements OnInit{
   richieste : any[] = [];
   giorniSettimana : any[] = [];
   giornoScelto = "LUN";
+  stateOptions: any[] = [];
+  modalita = "ROUTINE";
 
   constructor(private agendaService: AgendaService, private messageService: MessageService
     ,private datePipe: DatePipe
@@ -70,6 +72,11 @@ export class ConfigurazioneComponent implements OnInit{
     this.richieste.push(this.agendaService.getSettimana());
     //this.richieste.push(this.agendaService.getTurniGiorni());
 
+    this.stateOptions = [
+      { label: 'ROUTINE', value: 'ROUTINE' },
+      { label: 'EVENT', value: 'EVENT' }
+    ];
+
 
     forkJoin(this.richieste).subscribe((res:any) => {
       console.log(res);
@@ -85,12 +92,16 @@ export class ConfigurazioneComponent implements OnInit{
         turno.orarioFine = turno.orarioFine.substring(0, 2) + turno.orarioFine.substring(2, 5);
       });
 
+
       // 3
-      this.checked = this.agendaService.getConfigStringByCod(res[2], "MODE") == "EVENT" ? true : false;
+      this.modalita = this.agendaService.getConfigStringByCod(res[2], "MODE")
+      //this.checked = this.agendaService.getConfigStringByCod(res[2], "MODE") == "EVENT" ? true : false;
 
       // 4
       this.giorniSettimana = res[3];
       //this.turniGiornoModel.turni = [];
+
+      this.changeGiornoScelto("LUN");
     });
   }
 
@@ -100,6 +111,18 @@ export class ConfigurazioneComponent implements OnInit{
       res => {
         this.messageService.add({ severity: 'success', summary: 'OK', detail: 'Turni salvati', life: 4000 });
         this.ricaricaDatiPagina();
+      }
+    );
+  }
+
+  salvaMode(){
+    const modeObj: any = {};
+    modeObj.chiave = "MODE";
+    modeObj.stringValue = this.modalita;
+    this.agendaService.salvaCongif(modeObj).subscribe(
+      res => {
+        this.messageService.add({ severity: 'success', summary: 'OK', detail: 'Modalità modificata in ' + modeObj.stringValue, life: 4000 });
+        //this.ricaricaDatiPagina();
       }
     );
   }
@@ -204,17 +227,6 @@ export class ConfigurazioneComponent implements OnInit{
     this.dateWithTurniDto = [...this.dateWithTurni];
   }
 
-  cambiaMode(event:any){
-
-    let modeValue = this.checked ? "EVENT" : "ROUTINE"
-
-    let config = {chiave : "MODE", stringValue: modeValue};
-
-    this.agendaService.salvaCongif(config).subscribe(res => {
-      this.messageService.add({ severity: 'success', summary: 'OK', detail: 'Modalità salvata', life: 3000 });
-    });
-  }
-
   changeGiornoScelto(giorno:string){
     this.giornoScelto = giorno;
     this.turniGiornoModel = this.getGiornoByChiave(this.giorniSettimana, giorno);
@@ -227,5 +239,11 @@ export class ConfigurazioneComponent implements OnInit{
     }
     return {}
   }
+
+  test(){
+    console.log("test");
+  }
+
+  
 
 }

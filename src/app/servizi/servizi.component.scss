@@ -3,3 +3,13 @@
     flex-direction: row;
     justify-content: space-between;
 }
+
+.custom-button {
+    --p-primary-color: #ff5733 !important; /* Cambia il colore principale */
+    --p-primary-color-text: #ffffff; /* Colore del testo */
+}
+
+.p-button{
+    background: #ff5733 !important;
+    --p-button-primary-background: red !important;
+}

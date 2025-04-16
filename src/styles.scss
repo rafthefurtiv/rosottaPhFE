@@ -1,2 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 @import "primeicons/primeicons.css";
+
+:root{
+    --p-primary-color:rgb(197, 153, 70) !important;
+    --p-primary-hover-color: rgb(158, 116, 37) !important;
+    --p-primary-active-color: rgb(112, 82, 26) !important;
+}
+
+body {
+    font-family: 'EB Garamond', sans-serif; /* Cambia 'Roboto' con il font scelto */
+}

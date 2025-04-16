@@ -1,6 +1,12 @@
 
 <div class="page">
 
+    <div class="flex flex-row justify-content-center mt-4 mb-4">
+        <p-selectbutton (click)="salvaMode()" [options]="stateOptions" [(ngModel)]="modalita" 
+        optionLabel="label" optionValue="value" aria-labelledby="basic" />
+    </div>
+
+
     <p-tabs value="0">
         <p-tablist>
             <p-tab value="0">ROUTINE</p-tab>
@@ -34,7 +40,7 @@
 
                 <div class="turni mt-3">
                     <div class="mr-3" *ngFor="let turno of turniGiornoModel.turni">
-                        <p-chip label="{{turno.orarioInizio}} - {{turno.orarioFine}}" [removable]="true" (onRemove)="eliminaTurno(turno, turniGiornoModel)"/>
+                        <p-chip label="{{turno.orarioInizio.substring(0, 5)}} - {{turno.orarioFine.substring(0, 5)}}" [removable]="true" (onRemove)="eliminaTurno(turno, turniGiornoModel)"/>
                     </div>
                 </div>
 
@@ -85,7 +91,7 @@
             
                 <div class="turni mt-3">
                     <div class="mr-3" *ngFor="let turno of turniModel.turni">
-                        <p-chip label="{{turno.orarioInizio}} - {{turno.orarioFine}}" [removable]="true" (onRemove)="eliminaTurno(turno, turniModel)"/>
+                        <p-chip label="{{turno.orarioInizio.substring(0, 5)}} - {{turno.orarioFine.substring(0, 5)}}" [removable]="true" (onRemove)="eliminaTurno(turno, turniModel)"/>
                     </div>
                 </div>
 
